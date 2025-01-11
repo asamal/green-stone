@@ -1,10 +1,12 @@
 plugins {
-    id 'org.springframework.boot' version '3.2.5'
+    id 'org.springframework.boot' version '3.3.7'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'java'
     id 'jacoco'
     id 'org.sonarqube' version '5.1.0.4882'
+    id 'org.openrewrite.rewrite' version '7.0.0'
 }
+
 
 group = 'com.samal.greenstone'
 version = '0.0.1-SNAPSHOT'
@@ -51,6 +53,7 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.cloud:spring-cloud-contract-wiremock'
+    rewrite 'org.openrewrite.recipe:rewrite-spring:6.0.0'
 }
 
 dependencyManagement {
@@ -92,4 +95,9 @@ sonar {
         property("sonar.java.binaries", "build/classes")
         property("ssonar.jacoco.reportPaths", "build/reports/jacoco/test")
     }
+}
+
+rewrite {
+    activeRecipe("org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_3")
+    setExportDatatables(true)
 }

@@ -26,8 +26,7 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format(
-                "Use[id=%d, name='%s']",
+        return "Use[id=%d, name='%s']".formatted(
                 id, name);
     }
 }
